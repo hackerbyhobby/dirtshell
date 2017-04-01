@@ -40,11 +40,12 @@ if [[ $? -ne 0 ]]; then
 fi
  
 # read files from a file and print to stdout
+# use -k with curl to allow insecure connections to ssl sites without certs or valid certs, often found when testing
 if [[ ! -z $cmdfile ]]; then
     if [[ -f $cmdfile ]]; then
         for i in $(cat $cmdfile); do
             echo "[+] requesting ${url}${prefix}${i}${suffix}"
-            curl -s ${cookie} ${url}${prefix}${i}${suffix}
+            curl -s -k ${cookie} ${url}${prefix}${i}${suffix}
         done
     fi
 else
